@@ -1,0 +1,18 @@
+all: test_list measure
+
+test_list: test_list.o
+g++ -std=c++11 -o test_list test_list.o
+
+test_list.o: test_list.cpp List.h
+g++ -std=c++11 -c test_list.cpp
+
+measure: measure.o
+g++ -std=c++11 -o measure measure.o
+
+measure.o: measure.cpp Cell.h List.h
+g++ -std=c++11 -c measure.cpp
+
+
+clean:
+rm *.o test_list measure  
+

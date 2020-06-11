@@ -1,0 +1,160 @@
+/*
+Jean Roquebert
+COP4530
+Project #2
+Due October 10,2019
+Fall 2019
+
+analysis.txt
+*/
+
+Complexity of the the reverse function
+
+template <typename T>
+void List<T>::reverse()
+{
+    iterator a1= begin();   //O(1)
+    iterator a2= end();     //O(1)
+    a1--;                   //O(1)
+    for(int i=0; i<=theSize/2; i++)     //O(3N)
+    {                                   //O(3)
+        std::swap(*a1, *a2);
+        a1++;
+        a2--;
+    }
+}
+}// reverse the order of the elements
+
+3*O(1) + O(3N)*3
+O(N)+O(1)
+O(N+1)
+O(N);
+
+
+
+
+
+Complexity of the the deduplicate function
+template <typename T>
+void List<T>::deduplicate()
+{
+    Node *p1,*p2,*dup;
+    p1=head;
+    /* Pick elements one by one */
+    while (p1 != NULL && p1->next != NULL)
+    {
+        p2=p1;
+        /* Compare the picked element with rest of elements*/
+        while (p2->next != NULL)
+        {
+            /* If duplicate then delete it */
+            if (p1->data == p2->next->data)
+            {
+                dup = p2->next;
+                p2->next = p2->next->next;
+                delete(dup);
+                --theSize;
+            }
+            else
+            {
+                p2 = p2->next;
+            }
+        tail=p2;
+        }
+    p1 = p1->next;
+    }
+}
+
+
+O(N^2)
+
+
+
+
+
+
+3 measurements per list
+
+
+
+
+
+
+100 items list      Range= 100/3
+
+
+Reverse time 1 100-item list: 2 usec
+
+Deduplicate time 1 100-item list: 19 usec
+
+
+Reverse time 2 100-item list: 2 usec
+
+Deduplicate time 2 100-item list: 19 usec
+
+
+Reverse time 3 100-item list: 2 usec
+
+Deduplicate time 3 100-item list: 43 usec
+
+Average:
+reverse:    2 usec
+deduplicate: 27 usec
+
+
+
+
+
+
+
+
+
+1000 items list      Range= 1000/33
+
+
+Reverse time 1 1000-item list: 14 usec
+
+Deduplicate time 1 1000-item list: 172 usec
+
+
+Reverse time 2 1000-item list: 13 usec
+
+Deduplicate time 2 1000-item list: 171 usec
+
+
+Reverse time 3 1000-item list: 13 usec
+
+Deduplicate time 3 1000-item list: 171 usec
+
+Average:
+reverse:    13 usec
+deduplicate: 171 usec
+
+
+
+
+
+
+
+
+10000 items list      Range= 10000/333
+
+
+Reverse time 1 10000-item list: 146 usec
+
+Deduplicate time 1 10000-item list: 2045 usec
+
+
+Reverse time 2 10000-item list: 207 usec
+
+Deduplicate time 2 10000-item list: 2057 usec
+
+
+Reverse time 3 10000-item list: 244 usec
+
+Deduplicate time 3 10000-item list: 1944 usec
+
+Average:
+reverse:    199 usec
+deduplicate: 2015 usec
+
